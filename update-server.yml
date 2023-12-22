@@ -1,11 +1,17 @@
 ---
-- name: Gather System Facts without Root Access
+- name: Basic Task Without Sudo
   hosts: ubuntu
-  gather_facts: true
-  become: yes
-  become_user: your_non_root_user
+  gather_facts: false  # Disable gathering facts
 
   tasks:
-    - name: Display System Facts
-      debug:
-        var: ansible_facts
+    - name: Create Directory
+      file:
+        path: /path/to/your/directory
+        state: directory
+      become: no  # Do not attempt to become another user
+
+    - name: Create File
+      file:
+        path: /path/to/your/directory/your_file.txt
+        state: touch
+      become: no  # Do not attempt to become another user
