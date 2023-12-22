@@ -1,7 +1,9 @@
 ---
 - name: Update system
-  hosts: ubuntu
+  hosts: your_target_hosts
   become: yes
+  become_method: sudo
+  become_password: "Alhabsi$748"
   tasks:
     - name: Update package cache
       apt:
