@@ -1,10 +1,16 @@
 ---
-- name: Use Environment Variable in Ansible Playbook
-  hosts: ubuntu
-  vars:
-    my_variable: "{{ lookup('env', 'key') }}"
+- name: Update Ubuntu System
+  hosts: your_ubuntu_hosts
+  become: yes
+  become_user: root
 
   tasks:
-    - name: Display the value of the environment variable
-      debug:
-        msg: "The value of MY_ENV_VARIABLE is {{ my_variable | default('not set') }}"
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
