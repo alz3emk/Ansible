@@ -1,6 +1,6 @@
 ---
 - name: Gather System Information
-  hosts: ubuntu
+  hosts: your_target_host
   become: true  # Run tasks with sudo
 
   tasks:
@@ -12,9 +12,10 @@
         var: ansible_facts
 
     - name: Check System Health (Example: Check if a process is running)
-      ansible.builtin.systemd:
-        name: your_process_name
+      ansible.builtin.command:
+        cmd: "ps aux | grep -q '[y]our_process_name'"
       register: process_status
+      ignore_errors: true
 
     - name: Display Process Status
       debug:
