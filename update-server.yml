@@ -1,0 +1,30 @@
+---
+- name: Update System
+  hosts: ubuntu
+  become: yes
+
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      when: ansible_pkg_mgr == 'apt'  # Condition to check if the package manager is apt
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: yes
+        autoremove: yes
+        autoclean: yes
+      when: ansible_pkg_mgr == 'apt'  # Condition to check if the package manager is apt
+
+    # Add tasks for other package managers if needed
+    # - name: Update package cache for yum (example for Red Hat-based systems)
+    #   yum:
+    #     name: '*'
+    #     state: latest
+    #   when: ansible_pkg_mgr == 'yum'
+
+    # - name: Upgrade all packages for yum (example for Red Hat-based systems)
+    #   yum:
+    #     name: '*'
+    #     state: latest
+    #   when: ansible_pkg_mgr == 'yum'
