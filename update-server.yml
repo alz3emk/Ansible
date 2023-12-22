@@ -1,7 +1,10 @@
 ---
-- name: Ping hosts
+- name: Use Environment Variable in Ansible Playbook
   hosts: ubuntu
+  vars:
+    my_variable: "{{ lookup('env', 'key') }}"
 
   tasks:
-    - name: Ping the hosts
-      ping:
+    - name: Display the value of the environment variable
+      debug:
+        msg: "The value of MY_ENV_VARIABLE is {{ my_variable | default('not set') }}"
