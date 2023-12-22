@@ -1,30 +1,11 @@
 ---
-- name: Gather System Information
-  hosts: ubuntu
-  tasks:
-    - name: Get System Facts
-      ansible.builtin.setup:
+- name: Gather System Facts without Root Access
+  hosts: your_target_host
+  gather_facts: true
+  become: yes
+  become_user: your_non_root_user
 
+  tasks:
     - name: Display System Facts
       debug:
         var: ansible_facts
-
-    - name: Check System Health (Example: Check if a process is running)
-      ansible.builtin.command:
-        cmd: "ps aux | grep -q '[y]our_process_name'"
-      register: process_status
-      ignore_errors: true
-
-    - name: Display Process Status
-      debug:
-        var: process_status
-
-    - name: Get RAM and Disk Usage
-      ansible.builtin.shell: |
-        free -m
-        df -h
-      register: usage_output
-
-    - name: Display RAM and Disk Usage
-      debug:
-        var: usage_output.stdout_lines
