@@ -1,6 +1,6 @@
 ---
 - name: Update Ubuntu System
-  hosts: your_ubuntu_hosts
+  hosts: ubuntu
   become: yes
   become_user: root
 
