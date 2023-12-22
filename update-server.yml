@@ -1,6 +1,6 @@
 ---
 - name: Gather System Facts without Root Access
-  hosts: your_target_host
+  hosts: ubuntu
   gather_facts: true
   become: yes
   become_user: your_non_root_user
