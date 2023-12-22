@@ -1,6 +1,9 @@
 ---
-- name: Ping serverOne
+- name: Ping serverOne without host key checking
   hosts: serverOne
+  gather_facts: false  # Skip gathering facts to speed up the process
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: "False"  # Disable host key checking
   tasks:
     - name: Ping the host
       ping:
