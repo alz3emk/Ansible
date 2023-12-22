@@ -1,16 +1,39 @@
 ---
-- name: Update system
-  hosts: your_target_hosts
-  become: yes
-  become_method: sudo
+- name: Fun Ansible Playbook
+  hosts: ubuntu
+  become: false
 
   tasks:
-    - name: Update package cache
-      apt:
-        update_cache: yes
+    - name: Display a fun message
+      debug:
+        msg: "Let's have some fun with Ansible!"
 
-    - name: Upgrade all packages
+    - name: Create a directory in the user's home directory
+      file:
+        path: "~/fun_directory"
+        state: directory
+        mode: '0755'
+
+    - name: Download a funny image
+      get_url:
+        url: "https://example.com/funny_image.jpg"
+        dest: "~/fun_directory/funny_image.jpg"
+
+    - name: Print a joke
+      debug:
+        msg: "Why did the computer go to therapy? Because it had too many bytes of emotional baggage!"
+
+    - name: Install a fun package (fortune)
       apt:
-        upgrade: yes
-        autoremove: yes
-        autoclean: yes
+        name: fortune
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Display a fortune cookie message
+      command: fortune
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Remove the fun_directory
+      file:
+        path: "~/fun_directory"
+        state: absent
