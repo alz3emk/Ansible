@@ -6,12 +6,12 @@
   tasks:
     - name: Create Directory
       file:
-        path: /path/to/your/directory
+        path: /home
         state: directory
       become: no  # Do not attempt to become another user
 
     - name: Create File
       file:
-        path: /path/to/your/directory/your_file.txt
+        path: /home/your_file.txt
         state: touch
       become: no  # Do not attempt to become another user
