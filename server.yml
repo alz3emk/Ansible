@@ -1,6 +1,6 @@
 ---
 - name: Check if apt is installed
-  hosts: your_target_servers
+  hosts: serverOne
   become: true  # Run tasks with elevated privileges (sudo)
 
   tasks:
