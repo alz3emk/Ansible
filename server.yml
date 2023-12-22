@@ -1,21 +1,6 @@
 ---
-- name: Check if apt is installed
+- name: Ping serverOne
   hosts: serverOne
-  become: true  # Run tasks with elevated privileges (sudo)
-
   tasks:
-    - name: Check if apt is installed
-      command: dpkg -l | grep -E '^ii\s+apt\s'
-      register: apt_installed
-      ignore_errors: true
-
-    - name: Install apt if not installed
-      apt:
-        name: apt
-        state: present
-      when: apt_installed.rc != 0
-
-    - name: Display message
-      debug:
-        msg: "apt is installed on the system"
-      when: apt_installed.rc == 0
+    - name: Ping the host
+      ping:
