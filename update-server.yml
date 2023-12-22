@@ -1,8 +1,6 @@
 ---
 - name: Gather System Information
-  hosts: your_target_host
-  become: true  # Run tasks with sudo
-
+  hosts: ubuntu
   tasks:
     - name: Get System Facts
       ansible.builtin.setup:
