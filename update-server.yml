@@ -1,17 +1,14 @@
 ---
-- name: Basic Task Without Sudo
+- name: Update Ubuntu Packages
   hosts: ubuntu
-  gather_facts: false  # Disable gathering facts
-
+  become: true
   tasks:
-    - name: Create Directory
-      file:
-        path: /home
-        state: directory
-      become: no  # Do not attempt to become another user
+    - name: Update package cache
+      apt:
+        update_cache: yes
 
-    - name: Create File
-      file:
-        path: /home/your_file.txt
-        state: touch
-      become: no  # Do not attempt to become another user
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
