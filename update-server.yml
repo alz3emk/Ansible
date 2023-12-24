@@ -1,6 +1,6 @@
 ---
 - name: Update Ubuntu Packages
-  hosts: your_ubuntu_servers
+  hosts: ubuntu
   become: true
   become_method: sudo
   tasks:
