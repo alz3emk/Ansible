@@ -1,7 +1,8 @@
 ---
 - name: Update Ubuntu Packages
-  hosts: ubuntu
+  hosts: your_ubuntu_servers
   become: true
+  become_method: sudo
   tasks:
     - name: Update package cache
       apt:
